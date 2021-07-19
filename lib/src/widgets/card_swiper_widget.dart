@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:movies_app/src/models/movie.dart';
 
 class CardSwiper extends StatelessWidget {
-  List<dynamic> movies;
+  List<Movie> movies;
   CardSwiper({@required this.movies});
 
   @override
@@ -11,17 +12,19 @@ class CardSwiper extends StatelessWidget {
     return Container(
       padding: EdgeInsets.only(top: 10),
       child: Swiper(
-        itemWidth: _screenSize.width * 0.7,
+        itemWidth: _screenSize.width * 0.5,
         itemHeight: _screenSize.height * 0.5,
         layout: SwiperLayout.STACK,
         itemBuilder: (BuildContext context, int index) {
           return ClipRRect(
-            borderRadius: BorderRadius.circular(20.0),
-            child: Image.network(
-              'https://pics.filmaffinity.com/scary_movie-943532513-large.jpg',
-              fit: BoxFit.fitHeight,
-            ),
-          );
+              borderRadius: BorderRadius.circular(20.0),
+              child: FadeInImage(
+                fit: BoxFit.cover,
+                placeholder: AssetImage('assets/img/no-image.jpg'),
+                image: NetworkImage(
+                  movies[index].getPosterImg(),
+                ),
+              ));
         },
         itemCount: movies.length,
         // pagination: new SwiperPagination(),
