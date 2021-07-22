@@ -32,7 +32,7 @@ class Movie {
     this.voteAverage,
     this.voteCount,
   });
-
+  String uniqueId;
   bool adult;
   String backdropPath;
   List<int> genreIds;
@@ -87,6 +87,14 @@ class Movie {
       return 'https://st4.depositphotos.com/14953852/22772/v/600/depositphotos_227725184-stock-illustration-no-image-available-icon-flat.jpg';
     } else {
       return 'https://image.tmdb.org/t/p/w500/$posterPath';
+    }
+  }
+
+  getMovieBackgroundImg() {
+    if (backdropPath == null) {
+      return 'https://st4.depositphotos.com/14953852/22772/v/600/depositphotos_227725184-stock-illustration-no-image-available-icon-flat.jpg';
+    } else {
+      return 'https://image.tmdb.org/t/p/w500/$backdropPath';
     }
   }
 }

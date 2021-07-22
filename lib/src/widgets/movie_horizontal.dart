@@ -38,20 +38,24 @@ class MovieHorizontal extends StatelessWidget {
 
   // Este metodo nos permite crear una tarjeta que se cree en el pageview.builder
   Widget _movieCardBuilder(BuildContext context, Movie movie) {
-    return Container(
+    movie.uniqueId = '${movie.id}-horizontalCard';
+    final movieCard = Container(
       margin: EdgeInsets.only(right: 15.0),
       child: Column(
         children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(20.0),
-            child: FadeInImage(
-              placeholder: AssetImage('assets/img/no-image.jpg'),
-              image: NetworkImage(
-                movie.getPosterImg(),
+          Hero(
+            tag: movie.uniqueId,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(20.0),
+              child: FadeInImage(
+                placeholder: AssetImage('assets/img/no-image.jpg'),
+                image: NetworkImage(
+                  movie.getPosterImg(),
+                ),
+                fit: BoxFit.cover,
+                width: 400,
+                height: 200,
               ),
-              fit: BoxFit.cover,
-              width: 400,
-              height: 200,
             ),
           ),
           SizedBox(
@@ -64,6 +68,12 @@ class MovieHorizontal extends StatelessWidget {
           ),
         ],
       ),
+    );
+    return GestureDetector(
+      child: movieCard,
+      onTap: () {
+        Navigator.pushNamed(context, 'detail', arguments: movie);
+      },
     );
   }
 
